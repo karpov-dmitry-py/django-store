@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if title %}
+            {{ title }}
+        {% else %}
+           Just a title for this page
+        {% endif %}
+    </title>
+</head>
+<body>
+    {% block content %}{% endblock content %}
+</body>
+</html>
