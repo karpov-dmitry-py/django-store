@@ -1,4 +1,55 @@
 {% extends 'store/main.html' %}
+{% load static %}
 {% block content %}
-    <h3>{{ body }}</h3>
+<h3>{{ body }}</h3>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <form id="form">
+                <div id="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="name" placeholder="Name...">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="email" name="email" placeholder="Email...">
+                    </div>
+                </div>
+                <div id="shipping-info">
+                    <hr>
+                    <p>Shipping info</p>
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="address" placeholder="Address...">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="City" placeholder="City...">
+                    </div>
+                </div>
+                <input type="submit" id="form-button" class="btn btn-success btn-block" value="Continue">
+            </form>
+        </div>
+        <br>
+        <div id="payment-info" class="box-element">
+            <small>Payment options</small>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to cart</a>
+        </div>
+        <hr>
+        <h3>Order summary</h3>
+        <hr>
+        <div class="cart-row">
+            <div style="flex:2">
+                <image class="row-image" src="{% static 'images/placeholder.png' %}"></image>
+            </div>
+            <div style="flex:2">Product 1</div>
+            <div style="flex:1">2400 RUB</div>
+            <div style="flex:1">x2</div>
+        </div>
+        <h5>Items: 2</h5>
+        <h5>Total: 4800 RUB</h5>
+    </div>
+</div>
 {% endblock content %}
