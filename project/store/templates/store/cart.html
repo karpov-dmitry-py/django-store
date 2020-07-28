@@ -11,8 +11,28 @@
             <div style="margin: 15px 0px">
                 <table class="table">
                     <tr>
-                        <th><h5>Items: <strong>10</strong></h5></th>
-                        <th><h5>Total: <strong>2800 RUB</strong></h5></th>
+                        <th>
+                            <h5>Items:
+                                <strong>
+                                    {% if order %}
+                                        {{ order.quantity }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </strong>
+                            </h5>
+                        </th>
+                        <th>
+                            <h5>Total:
+                                <strong>
+                                    {% if order %}
+                                        {{ order.amount|floatformat:2 }} RUB
+                                    {% else %}
+                                        0.00 RUB
+                                    {% endif %}
+                                </strong>
+                            </h5>
+                        </th>
                         <th><a class="btn btn-success" href="{% url 'checkout' %}">Checkout</a></th>
                     </tr>
                 </table>
@@ -26,21 +46,23 @@
                     <div style="flex:1"><strong>Quantity</strong></div>
                     <div style="flex:1"><strong>Total</strong></div>
                 </div>
-                <div class="cart-row">
-                    <div style="flex:2">
-                        <image class="row-image" src="{% static 'images/placeholder.png' %}"></image>
-                    </div>
-                    <div style="flex:2">Product 1</div>
-                    <div style="flex:1">2400 RUB</div>
-                    <div style="flex:1">
-                        <p class="quantity">2</p>
-                        <div class="quantity">
-                            <img class="chg-quantity" src="{% static 'images/arrow-up.png' %}">
-                            <img class="chg-quantity" src="{% static 'images/arrow-down.png' %}">
+                {% for item in items %}
+                    <div class="cart-row">
+                        <div style="flex:2">
+                            <image class="row-image" src="{{ item.product.image_path }}"></image>
                         </div>
+                        <div style="flex:2">{{ item.product.name }}</div>
+                        <div style="flex:1">{{ item.product.price|floatformat:2 }}</div>
+                        <div style="flex:1">
+                            <p class="quantity">{{ item.quantity }}</p>
+                            <div class="quantity">
+                                <img class="chg-quantity" src="{% static 'images/arrow-up.png' %}">
+                                <img class="chg-quantity" src="{% static 'images/arrow-down.png' %}">
+                            </div>
+                        </div>
+                        <div style="flex:1"><strong>{{ item.amount }}</strong></div>
                     </div>
-                    <div style="flex:1"><strong>4800 RUB</strong></div>
-                </div>
+                {% endfor %}
             </div>
 
         </div>
